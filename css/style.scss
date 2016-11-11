@@ -1,0 +1,273 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
+@import url( 'https://fonts.googleapis.com/css?family=Lato');
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    border-bottom: solid 1px;
+    padding-bottom: 0.5em;
+}
+
+.experience {
+    $base-border-radius: 3px !default;
+    $base-spacing: 1.5em !default;
+    $action-color: #FFF !default;
+    $dark-gray: #333 !default;
+    $base-font-color: $dark-gray !default;
+    $experience-gutter: 1.4em;
+    $experience-image-padding: 0;
+    $experience-image-width: 4em;
+    $experience-color: $base-font-color;
+    $experience-background: lighten($action-color, 15%);
+    $experience-detail-color: transparentize($experience-color, 0.5);
+    $experience-image-vert-alignment: top;
+    border-bottom: 1px solid transparentize($experience-color, 0.9);
+    display: table;
+    margin-bottom: $base-spacing;
+    padding-bottom: 1em;
+    width: 100%;
+
+    .experience-content,
+    .experience-image {
+        display: table-cell;
+        vertical-align: $experience-image-vert-alignment;
+    }
+
+    .experience-image {
+        padding-right: $experience-gutter;
+
+        > img {
+            background: $experience-background;
+            border-radius: $base-border-radius;
+            display: block;
+            height: auto;
+            max-width: none;
+            padding: $experience-image-padding;
+            width: $experience-image-width;
+        }
+
+        .experience-reverse-order & {
+            padding-left: 10px;
+            padding-right: 0;
+        }
+    }
+
+    .experience-content {
+        width: 100%;
+
+        h3 {
+            font-size: 1em;
+            margin: 0 0 0.5em;
+        }
+
+        p {
+            line-height: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        p.experience-detail {
+            color: $experience-detail-color;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+    }
+}
+@mixin grid-item-columns($columns) {
+    width: (100% / 12) * $columns;
+}
+
+.grid-items {
+    $action-color: #477DCA !default;
+    $base-background-color: white !default;
+    $medium-screen: 40em !default;
+    $large-screen: 53.75em !default;
+    $grid-items-background: $base-background-color;
+    $grid-item-background: desaturate($action-color, 30%);
+    $grid-item-colors: desaturate($action-color, 30%), #3581A5, #5FBEBE, #98C79A, #A7A891, #BDCC97, #979EA0;
+    $grid-item-border-size: 9px;
+    $grid-item-columns: 4;
+    $grid-item-big-columns: 8;
+    $grid-item-color: white;
+    $grid-item-height: 10em;
+    @include clearfix;
+
+    .grid-item {
+        background: $grid-item-background;
+        border-bottom: $grid-item-border-size solid $grid-items-background;
+        border-left: ($grid-item-border-size / 2) solid $grid-items-background;
+        border-right: ($grid-item-border-size / 2) solid $grid-items-background;
+        border-top: 0;
+        cursor: pointer;
+        float: left;
+        height: $grid-item-height;
+        outline: none;
+        overflow: hidden;
+        padding: 2em;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        width: 100%;
+        @include media($large-screen) {
+             @include grid-item-columns($grid-item-columns);
+        }
+        @for $i from 1 through length($grid-item-colors) {
+            // assign colors from $grid-item-colors list
+            &:nth-child(#{$i}) {
+                $background-from-list: nth($grid-item-colors, $i);
+                background-color: $background-from-list;
+                box-shadow: inset 0 0 1px 2px darken($background-from-list, 10%);
+
+                &:focus,
+                &:hover {
+                    background-color: darken($background-from-list, 10%);
+                    background-position: top;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+            }
+        }
+    }
+
+    .grid-item img {
+        display: block;
+        height: 3em;
+        margin: 0 auto 1em;
+    }
+
+    .grid-item h3 {
+        color: $grid-item-color;
+        font-size: 1.3em;
+        margin-bottom: 0.4em;
+    }
+
+    .grid-item p {
+        color: transparentize($grid-item-color, 0.3);
+        line-height: 1.5em;
+        margin: auto;
+        @include media($medium-screen) {
+            max-width: 70%;
+        }
+    }
+
+    .grid-item-big {
+        @include media($large-screen) {
+             @include grid-item-columns($grid-item-big-columns);
+        }
+
+        p {
+            @include media($medium-screen) {
+                max-width: 60%;
+            }
+        }
+    }
+
+    .grid-item-image {
+        background: url("https: //raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png");
+        background-color: $grid-item-background;
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
+.footer-2 {
+    $base-spacing: 1.5em !default;
+    $action-color: #477DCA !default;
+    $medium-screen: 40em !default;
+    $large-screen: 53.75em !default;
+    $footer-background: desaturate(darken($action-color, 20%), 30%);
+    $footer-color: white;
+    $footer-link-color: transparentize($footer-color, 0.6);
+    $footer-disclaimer-color: transparentize($footer-color, 0.6);
+    background: $footer-background;
+    display: inline-block;
+    padding: $base-spacing;
+    width: 100%;
+
+    .footer-logo {
+        margin-bottom: 1em;
+        margin-right: 1em;
+        @include media($large-screen) {
+            float: left;
+            margin-bottom: 0;
+        }
+    }
+
+    .footer-logo img {
+        height: 1.6em;
+    }
+
+    ul {
+        line-height: 1.5em;
+        margin: 0 0 1em;
+        padding: 0;
+        @include media($large-screen) {
+            float: left;
+            line-height: 1.8em;
+            margin-bottom: 0;
+            margin-left: 1em;
+        }
+    }
+
+    ul li {
+        list-style: none;
+        padding-right: 1em;
+        @include media($large-screen) {
+            display: inline;
+            text-align: left;
+        }
+    }
+
+    ul li {
+        color: $footer-link-color;
+    }
+
+    .footer-secondary-links {
+        @include media($large-screen) {
+            float: right;
+        }
+
+        li {
+            font-size: 0.8em;
+        }
+
+        ul.footer-social {
+            margin: 1em 0 0;
+            @include media($large-screen) {
+                float: right;
+                margin-top: 0;
+            }
+
+            li {
+                float: left;
+                font-size: 1em;
+                line-height: 0;
+                margin: 0;
+                padding-right: 0.7em;
+
+                &:last-child {
+                    padding-right: 0;
+                }
+            }
+
+            img {
+                height: 1.6em;
+                opacity: 0.7;
+                padding: 1px;
+
+                &:focus,
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
